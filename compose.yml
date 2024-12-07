@@ -1,0 +1,3 @@
+include:
+  - ./api/server.yml
+  - ./ui/client.yml
