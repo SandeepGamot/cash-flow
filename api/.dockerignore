@@ -1,0 +1,11 @@
+node_modules/
+.git/
+.vscode/
+dist/
+build/
+package-lock.json
+docker-compose.yml
+Dockerfile
+.env.local
+.gitignore
+.dockerignore

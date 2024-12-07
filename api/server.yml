@@ -1,0 +1,59 @@
+version: "3.3"
+name: cash-flow
+
+networks:
+  cash-flow-client:
+    external: true
+  cash-flow-server:
+    external: true
+
+
+services:
+  api:
+    container_name: cash-flow-server-api
+    build:
+      context: .
+      target: dev
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./src:/cashflow/app/api/src
+      - ./package.json:/cashflow/app/api/package.json
+      - ./tsconfig.json:/cashflow/app/api/tsconfig.json
+    networks:
+      - cash-flow-client
+      - cash-flow-server
+    environment:
+      ORIGIN_URL: ${ORIGIN_URL}
+      ORIGIN_DOMAIN: ${ORIGIN_DOMAIN}
+      APP_PORT: ${APP_PORT}
+      GOOGLE_OAUTH_CLIENT_ID: ${GOOGLE_OAUTH_CLIENT_ID}
+      GOOGLE_OAUTH_CLIENT_SECRET: ${GOOGLE_OAUTH_CLIENT_SECRET}
+      GOOGLE_OAUTH_CALLBACK: ${GOOGLE_OAUTH_CALLBACK}
+      GOOGLE_OAUTH_SCOPE_USER_INFO: ${GOOGLE_OAUTH_SCOPE_USER_INFO}
+      GOOGLE_OAUTH_SCOPE_EMAIL: ${GOOGLE_OAUTH_SCOPE_EMAIL}
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
+      JWT_SECRET: ${JWT_SECRET}
+    depends_on:
+      - db
+  db:
+    image: postgres:latest
+    container_name: cash-flow-server-db
+    restart: always
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - cash-flow-server
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - "5432:5432"
+
+volumes:
+  postgres_data:

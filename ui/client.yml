@@ -1,0 +1,17 @@
+version: '3.8'
+
+networks:
+  cash-flow-client:
+    external: true
+
+services:
+  ui:
+    container_name: cash-flow-client-ui
+    build:
+      context: .
+    ports:
+      - "5173:5173"
+    environment:
+      - NODE_ENV=development 
+    networks:
+      - cash-flow-client
