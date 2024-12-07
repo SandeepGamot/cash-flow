@@ -6,6 +6,6 @@ Cashflow is a simple app for group/family expense tracking.
 
 ### Running Instructions:
 
-- make sure you have all the env variables sourced on your terminal session as required under `api` service of `api/server.yml` file.
+- make sure you have all the env variables in `api/.env` file as required under `api` service of `api/server.yml` file.
 
 - make sure you're in the root of the project and run `docker compose up`
