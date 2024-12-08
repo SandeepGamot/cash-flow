@@ -25,3 +25,4 @@ todo:
 - [ ] dashboard consisting of summary of all flow of cash
 - [ ] intra-group transfer transaction
 - [ ] creation and manging of "vaults" to keep track of physical cash.
+- [ ] make this a PWA with local-save and auto-sync when server's online.
