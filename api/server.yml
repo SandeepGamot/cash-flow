@@ -1,16 +1,15 @@
-version: "3.3"
 name: cash-flow
 
 networks:
-  cash-flow-client:
+  cashflow-client:
     external: true
-  cash-flow-server:
+  cashflow-server:
     external: true
 
 
 services:
   api:
-    container_name: cash-flow-server-api
+    container_name: cashflow-server-api
     build:
       context: .
       target: dev
@@ -21,8 +20,8 @@ services:
       - ./package.json:/cashflow/app/api/package.json
       - ./tsconfig.json:/cashflow/app/api/tsconfig.json
     networks:
-      - cash-flow-client
-      - cash-flow-server
+      - cashflow-client
+      - cashflow-server
     environment:
       ORIGIN_URL: ${ORIGIN_URL}
       ORIGIN_DOMAIN: ${ORIGIN_DOMAIN}
@@ -42,12 +41,12 @@ services:
       - db
   db:
     image: postgres:latest
-    container_name: cash-flow-server-db
+    container_name: cashflow-server-db
     restart: always
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
-      - cash-flow-server
+      - cashflow-server
     environment:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
