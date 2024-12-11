@@ -1,10 +1,10 @@
 networks:
-  cashflow-client:
+  cashflow:
     external: true
 
 services:
   ui:
-    container_name: cashflow-client-ui
+    container_name: cashflow-ui
     build:
       context: .
     ports:
@@ -12,5 +12,5 @@ services:
     environment:
       - NODE_ENV=development 
     networks:
-      cashflow-client:
+      cashflow:
         ipv4_address: 10.7.0.7
