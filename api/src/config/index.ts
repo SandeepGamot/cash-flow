@@ -12,8 +12,8 @@ export const AppConfig = {
     },
   },
   origin: {
-    domain: process.env.ORIGIN_DOMAIN || "cashflow-ui",
-    url: process.env.ORIGIN_URL || "http://cashflow-ui:5173",
+    domain: process.env.ORIGIN_DOMAIN || "localhost",
+    url: process.env.ORIGIN_URL || "http://localhost:5173",
   },
   port: process.env.APP_PORT,
   db: {
