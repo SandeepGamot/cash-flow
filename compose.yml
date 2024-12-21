@@ -4,6 +4,11 @@ services:
   nginx:
     build:
       context: ./nginx
+    develop:
+      watch:
+        - path: ./nginx/nginx.conf
+          action: sync+restart
+          target: /etc/nginx/nginx.conf
     ports:
       - "80:80"
     networks:
@@ -15,10 +20,17 @@ services:
   ui:
     build:
       context: ./ui
+    develop:
+      watch:
+        - path: ./ui
+          action: sync
+          target: /src/ui
+          ignore:
+            - ./ui/node_modules/
+        - path: ./ui/package.json
+          action: rebuild
     ports:
       - "5173:5173"
-    volumes:
-      - ./ui:/app/ui
     networks:
       - cashflow
     depends_on:
@@ -26,12 +38,19 @@ services:
   api:
     build:
       context: ./api
+    develop:
+      watch:
+        - path: ./api
+          action: sync+restart
+          target: /src/api
+          ignore:
+            - ./api/node_modules/
+        - path: ./api/package.json
+          action: rebuild
+        - path: ./api/tsconfig.json
+          action: rebuild
     ports:
       - "5000:5000"
-    volumes:
-      - ./api/src:/app/api/src
-      - ./api/package.json:/app/api/package.json
-      - ./api/tsconfig.json:/app/api/tsconfig.json
     networks:
       - cashflow
     environment:

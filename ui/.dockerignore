@@ -6,4 +6,6 @@ dist/
 .eslintrc.cjs
 .prettierrc.json
 README.md
+package-lock.json
+Dockerfile
 .dockerignore

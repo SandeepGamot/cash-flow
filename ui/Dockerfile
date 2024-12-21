@@ -1,12 +1,13 @@
 FROM node:lts-alpine
 
-WORKDIR /ui
+WORKDIR /src/ui
 
-COPY package.json package-lock.json ./
+COPY package.json .
 
 RUN npm install
 
-COPY tsconfig.json vite.config.ts ./
+COPY tsconfig.json .
+COPY vite.config.ts .
 
 COPY . .
 
