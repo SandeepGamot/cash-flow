@@ -11,4 +11,5 @@ CMD ["npm", "run", "dev"]
 FROM base AS prod
 RUN npm install --production && npm run build
 COPY . .
+EXPOSE 5000
 CMD ["node", "dist/main.js"]
