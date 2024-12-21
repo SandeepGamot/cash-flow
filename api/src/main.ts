@@ -5,11 +5,13 @@ import dataSource from "./database/data-source";
 import router from "./routes";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
+import morgan from "morgan";
 
 function bootstrap() {
   const app = express();
   app.use(cookieParser());
   app.use(bodyParser.json());
+  app.use(morgan("dev"));
   app.use(
     cors({
       origin: [AppConfig.origin.url],
