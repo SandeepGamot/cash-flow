@@ -34,7 +34,9 @@ export const googleCallbackHandler: RequestHandler = async (req, res) => {
   );
   res.cookie("accessToken", jwt, {
     httpOnly: true,
-    domain: AppConfig.origin.domain,
+    domain: "localhost",
+    sameSite: "none",
+    secure: true,
     maxAge: 24 * 60 * 60 * 1000,
   });
   res.redirect(AppConfig.origin.url);

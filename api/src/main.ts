@@ -14,11 +14,16 @@ function bootstrap() {
   app.use(morgan("dev"));
   app.use(
     cors({
-      origin: [AppConfig.origin.url],
+      origin: [
+        AppConfig.origin.url,
+        "https://cashflow.gamot.co.in/google",
+        "http://localhost:5000",
+        "http://localhost:5173",
+      ],
       credentials: true,
     })
   );
-  app.use(router);
+  app.use("/api", router);
   app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
     console.error(error);
     res.status(500).send({ error: "something went wrong on the server" });
