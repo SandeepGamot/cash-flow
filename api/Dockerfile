@@ -1,15 +1,15 @@
-FROM node:lts-alpine AS base
-WORKDIR /cashflow/app/api
-COPY tsconfig.json package.json ./
+FROM node:lts-alpine
 
-FROM base AS dev
+WORKDIR /api
+
+COPY package.json .
+
 RUN npm install
-COPY . .
-RUN source .env
-CMD ["npm", "run", "dev"]
 
-FROM base AS prod
-RUN npm install --production && npm run build
+COPY tsconfig.json .
+
 COPY . .
+
 EXPOSE 5000
-CMD ["node", "dist/main.js"]
+
+CMD ["npm", "run", "dev"]
