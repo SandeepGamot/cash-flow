@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import AppLogo from '@/components/icons/AppLogo.vue'
 
-const { show } = withDefaults(defineProps<{ show: boolean; text: string }>(), {
-  text: 'Loading...'
-})
+const { show, text = 'Loading...' } = defineProps<{ show: boolean; text?: string }>()
 </script>
 
 <template>

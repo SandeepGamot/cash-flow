@@ -10,7 +10,7 @@ services:
           action: sync+restart
           target: /etc/nginx/nginx.conf
     ports:
-      - "80:80"
+      - "8888:80"
     networks:
       cashflow:
         ipv4_address: 10.7.0.5
@@ -89,7 +89,7 @@ networks:
     attachable: false
     ipam:
       config:
-        - subnet: 10.7.0.0/28
+        - subnet: 10.7.0.0/24
 volumes:
   postgres_data:
 

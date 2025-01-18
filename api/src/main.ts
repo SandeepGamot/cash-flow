@@ -11,12 +11,16 @@ function bootstrap() {
   const app = express();
   app.use(cookieParser());
   app.use(bodyParser.json());
-  app.use(morgan("dev"));
+  app.use(
+    // morgan(":method :url :req[header] | :status :res[header] :response-time ms")
+    morgan(":req[header] | :res[header]")
+  );
   app.use(
     cors({
       origin: [
         AppConfig.origin.url,
-        "https://cashflow.gamot.co.in/google",
+        // "https://cashflow.gamot.co.in",
+        "https://cashflow.gamot.co.in/",
         "http://localhost:5000",
         "http://localhost:5173",
       ],
