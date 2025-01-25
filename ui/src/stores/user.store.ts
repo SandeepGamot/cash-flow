@@ -5,7 +5,6 @@ import { defineStore } from 'pinia'
 export const useUserStore = defineStore('userStore', {
   state: (): UserStore => ({
     user: null,
-    account: null
   }),
   getters: {
     isLoggedIn: (state) => state.user != null

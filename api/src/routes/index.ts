@@ -8,6 +8,6 @@ import { allowCredentials } from "../middlewares/allow-credentials.middleware";
 const router = Router();
 
 router.use("/auth", AuthRoutes);
-router.use("/users", authMiddleware, allowCredentials, UserRoutes);
+router.use("/users", UserRoutes);
 router.use("/transactions", authMiddleware, TransactionRoutes);
 export default router;

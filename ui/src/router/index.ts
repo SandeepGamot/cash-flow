@@ -2,14 +2,14 @@ import { createRouter, createWebHistory } from 'vue-router'
 import { authRouteNames, authRoutes } from '@/router/auth.router'
 import NotFound from '@/components/common/NotFound.vue'
 import HomePage from '@/views/home-page/HomePage.vue'
-import { accountRouteNames, accountRoutes } from './account.router'
+import { userRouteNames, userRoutes } from './user.router'
 import { transatctionRouteNames, transatctionRoutes } from './transaction.router'
 import { useUserStore } from '@/stores/user.store'
 
 export const AppRoutes = {
   base: 'home-page',
   auth: authRouteNames,
-  accounts: accountRouteNames,
+  users: userRouteNames,
   transactions: transatctionRouteNames,
   error: {
     notFound: '404'
@@ -20,7 +20,7 @@ const router = createRouter({
   history: createWebHistory(),
   routes: [
     ...authRoutes,
-    ...accountRoutes,
+    ...userRoutes,
     ...transatctionRoutes,
     {
       path: '/',

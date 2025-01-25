@@ -11,8 +11,8 @@ import TransactionButtons from './TransactionButtons.vue'
 const userStore = useUserStore()
 const loading = ref(false)
 
-const sendToAuthPage = () => {
-  router.push({ name: AppRoutes.auth.google, replace: true })
+const sendToLoginPage = () => {
+  router.push({ name: AppRoutes.users.login, replace: true })
 }
 
 onMounted(() => {
@@ -21,7 +21,7 @@ onMounted(() => {
     .verifyUser()
     .catch(() => {
       userStore.logout()
-      sendToAuthPage()
+      sendToLoginPage()
     })
     .finally(() => {
       loading.value = false
@@ -30,7 +30,7 @@ onMounted(() => {
 
 watch(() => userStore.user, (updatedUserVal) => {
   if (updatedUserVal == null) {
-    sendToAuthPage()
+    sendToLoginPage()
   }
 })
 

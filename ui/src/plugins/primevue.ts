@@ -30,6 +30,7 @@ import OverlayPanel from 'primevue/overlaypanel'
 import Paginator from 'primevue/paginator'
 import Panel from 'primevue/panel'
 import PanelMenu from 'primevue/panelmenu'
+import Password from 'primevue/password'
 import Portal from 'primevue/portal'
 import ProgressBar from 'primevue/progressbar'
 import ProgressSpinner from 'primevue/progressspinner'
@@ -131,6 +132,7 @@ export default {
     // app.component('OverlayPanel', OverlayPanel)
     // app.component('Paginator', Paginator)
     app.component('ProgressBar', ProgressBar)
+    app.component('Password', Password)
     // app.component('Panel', Panel)
     // app.component('PanelMenu', PanelMenu)
     // app.component('Portal', Portal)

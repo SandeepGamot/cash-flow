@@ -25,13 +25,13 @@ export const authMiddleware: RequestHandler = async (
       .status(HTTP.Unauthorized)
       .json({ message: "property 'accessToken' missing from cookies" });
   }
-  const { sub: userId } = verify(token, AppConfig.jwt.secret as string);
+  const { sub: username } = verify(token, AppConfig.jwt.secret as string);
 
-  if (!userId) {
+  if (!username) {
     return res.status(HTTP.Unauthorized).send({ message: "invalid token" });
   }
 
-  const user = await userService.findById(userId as string);
+  const user = await userService.findByUsername(username as string);
 
   if (!user) {
     return res

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useUserStore } from '@/stores/user.store'
-import AppLogo from '@/components/icons/AppLogo.vue'
 import { onMounted } from 'vue'
 import router, { AppRoutes } from '@/router'
 

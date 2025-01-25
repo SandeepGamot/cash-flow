@@ -2,7 +2,7 @@ import { useUserStore } from '@/stores/user.store'
 import UserExpenseForm from '@/views/transaction-forms/UserExpenseForm.vue'
 import UserIncomeForm from '@/views/transaction-forms/UserIncomeForm.vue'
 import type { RouteRecordRaw } from 'vue-router'
-import { authRouteNames } from './auth.router'
+import { userRouteNames } from './user.router'
 
 export const transatctionRouteNames = {
   base: 'transactions',
@@ -25,7 +25,7 @@ export const transatctionRoutes: Array<RouteRecordRaw> = [
       const { isLoggedIn, verifyUser } = useUserStore()
       await verifyUser()
       if (!isLoggedIn) {
-        return next({ name: authRouteNames.google })
+        return next({ name: userRouteNames.login })
       }
       next()
     },
