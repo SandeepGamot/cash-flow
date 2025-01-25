@@ -2,18 +2,16 @@ import { IsEmail, MinLength } from "class-validator";
 import { UserRoleKey } from "../user.types";
 
 interface CreateUser {
-  firstName: string;
-  lastName: string;
-  email: string;
+  username: string;
+  password: string;
   role?: UserRoleKey;
 }
 
 export class CreateUserDto implements CreateUser {
   @MinLength(2)
-  firstName: string;
+  username: string;
   @MinLength(2)
-  lastName: string;
+  password: string;
   @IsEmail()
-  email: string;
   role?: UserRoleKey;
 }
