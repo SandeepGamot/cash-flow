@@ -12,9 +12,10 @@ export class ExpenseTransaction extends TransactionAuditProperties {
   id: string;
 
   @Column({
-    type: "varchar",
-    length: 15,
+    type: "numeric",
+    precision: 15,
     default: "0",
+    scale: 2,
     transformer: new DecimalTransformer(),
   })
   amount: number;
