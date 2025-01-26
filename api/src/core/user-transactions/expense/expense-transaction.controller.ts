@@ -1,47 +1,69 @@
 import { RequestHandler } from "express";
-import { CreateExpenseTransactionInput } from "./expense-transaction.schema";
+import {
+  CreateExpenseTransactionInput,
+  ExpenseTransactionListQuery,
+} from "./expense-transaction.schema";
+import { expenseTransactionService } from "./expense-transaction.service";
 import dataSource from "../../../database/data-source";
-import { User } from "../../users/user.entity";
 import { ExpenseTransaction } from "./expense-transaction.entity";
-import { ExpenseCategoryRepository } from "./category/category.repository";
-import { ExpenseSubCategoryRepository } from "./sub-category/sub-category.repository";
-import { PaymentModeRepository } from "./payment-mode/payment-mode.repository";
+
+export const getExpenseTransactionAggegateHandler: RequestHandler<
+  unknown,
+  unknown,
+  unknown,
+  ExpenseTransactionListQuery
+> = async (req, res) => {
+  const { start_date, end_date, user } = req.query;
+
+  const query = dataSource
+    .getRepository(ExpenseTransaction)
+    .createQueryBuilder("expense")
+    .select("SUM(expense.amount)", "totalAmount")
+    .where("expense.createdAt BETWEEN :start_date AND :end_date", {
+      start_date,
+      end_date,
+    });
+
+  if (user) {
+    query.andWhere("expense.createdBy = :user", { user });
+  }
+
+  const { totalAmount } = await query.getRawOne();
+  res.status(200).json({ totalAmount });
+};
+
+export const getExpenseTransactionListHandler: RequestHandler<
+  unknown,
+  unknown,
+  unknown,
+  ExpenseTransactionListQuery
+> = async (req, res) => {
+  const { start_date, end_date, user, page, limit } = req.query;
+
+  const query = dataSource
+    .getRepository(ExpenseTransaction)
+    .createQueryBuilder("expense")
+    .where("expense.createdAt BETWEEN :start_date AND :end_date", {
+      start_date,
+      end_date,
+    });
+
+  if (user) {
+    query.andWhere("expense.createdBy = :user", { user });
+  }
+  query.skip(page * limit);
+  query.take(limit);
+
+  const [transactions, total] = await query.getManyAndCount();
+  res.json({ transactions, total });
+};
 
 export const createExpenseTransactionHandler: RequestHandler<
   unknown,
   unknown,
   CreateExpenseTransactionInput
 > = async (req, res) => {
-  const { amount, category, subCategory, paymentMode, description } = req.body;
-  const createdExpenseTransaction =
-    await dataSource.transaction<ExpenseTransaction>(async (entityManager) => {
-      const expenseCategoryRepo = entityManager.withRepository(
-        ExpenseCategoryRepository
-      );
-      const expenseSubCategoryRepo = entityManager.withRepository(
-        ExpenseSubCategoryRepository
-      );
-      const paymentModeRepo = entityManager.withRepository(
-        PaymentModeRepository
-      );
-
-      const expenseCategory = await expenseCategoryRepo.findOrCreate(category);
-      const expenseSubCategory = await expenseSubCategoryRepo.findOrCreate(
-        subCategory
-      );
-      const expensePaymentMode = await paymentModeRepo.findOrCreate(
-        paymentMode
-      );
-
-      const expenseTransaction = new ExpenseTransaction();
-      expenseTransaction.amount = amount;
-      expenseTransaction.description = description;
-      expenseTransaction.category = expenseCategory;
-      expenseTransaction.subCategory = expenseSubCategory;
-      expenseTransaction.paymentMode = expensePaymentMode;
-      expenseTransaction.createdBy = req.user!;
-      await entityManager.save(expenseTransaction);
-      return expenseTransaction;
-    });
-  return res.status(201).send(createdExpenseTransaction);
+  return res
+    .status(201)
+    .send(await expenseTransactionService.create(req.body, req.user!));
 };

@@ -1,5 +1,5 @@
 import dataSource from "../../../../database/data-source";
-import { UnapprovedPaymentMode } from "../../../../database/views/unapproved-payment-mode.view";
+import { UnapprovedPaymentMode } from "./views/unapproved-payment-mode.view";
 import { PaymentMode } from "./payment-mode.entity";
 
 const getUnapprovedPaymentModes = async () => {

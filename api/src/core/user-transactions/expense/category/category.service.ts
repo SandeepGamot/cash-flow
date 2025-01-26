@@ -1,5 +1,5 @@
 import dataSource from "../../../../database/data-source";
-import { UnapprovedExpenseCategories } from "../../../../database/views/unapproved-categories.view";
+import { UnapprovedExpenseCategories } from "./views/unapproved-categories.view";
 import { ExpenseCategory } from "./category.entity";
 
 const getUnapprovedCategories = async () => {

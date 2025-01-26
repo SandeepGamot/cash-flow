@@ -5,9 +5,9 @@ import { ExpenseTransaction } from "../core/user-transactions/expense/expense-tr
 import { ExpenseCategory } from "../core/user-transactions/expense/category/category.entity";
 import { ExpenseSubCategory } from "../core/user-transactions/expense/sub-category/sub-category.entity";
 import { PaymentMode } from "../core/user-transactions/expense/payment-mode/payment-mode.entity";
-import { UnapprovedExpenseCategories } from "./views/unapproved-categories.view";
-import { UnapprovedExpenseSubCategories } from "./views/unapproved-sub-categories.view";
-import { UnapprovedPaymentMode } from "./views/unapproved-payment-mode.view";
+import { UnapprovedExpenseCategories } from "../core/user-transactions/expense/category/views/unapproved-categories.view";
+import { UnapprovedExpenseSubCategories } from "../core/user-transactions/expense/sub-category/views/unapproved-sub-categories.view";
+import { UnapprovedPaymentMode } from "../core/user-transactions/expense/payment-mode/views/unapproved-payment-mode.view";
 
 export default new DataSource({
   type: "postgres",

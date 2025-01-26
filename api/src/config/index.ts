@@ -11,6 +11,9 @@ export const AppConfig = {
       maxLength: 80,
     },
   },
+  dev: {
+    env: process.env.NODE_ENV || "dev",
+  },
   origin: {
     domain: process.env.ORIGIN_DOMAIN || "localhost",
     url: process.env.ORIGIN_URL || "http://localhost:5173",
