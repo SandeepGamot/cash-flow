@@ -111,7 +111,7 @@ export default {
     // app.component('BlockUI', BlockUI)
     app.component('Button', Button)
     // app.component('Calendar', Calendar)
-    // app.component('Card', Card)
+    app.component('Card', Card)
     // app.component('Chip', Chip)
     // app.component('Column', Column)
     // app.component('ConfirmDialog', ConfirmDialog)

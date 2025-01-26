@@ -4,7 +4,7 @@ import { useUserStore } from '@/stores/user.store'
 import router, { AppRoutes } from '@/router'
 import ProgressSpinner from '@/components/common/ProgressSpinner.vue'
 import TopBar from './TopBar.vue'
-// import StatsGrid from './StatsGrid.vue'
+import ExpenseSummaryGrid from './ExpenseSummaryGrid.vue'
 // import VaultSection from './VaultSection.vue'
 import TransactionButtons from './TransactionButtons.vue'
 
@@ -42,7 +42,7 @@ watch(() => userStore.user, (updatedUserVal) => {
     <ProgressSpinner :show="loading" />
     <div v-if="!loading">
       <TopBar :user="userStore.user" @logout='userStore.logout()' />
-      <!-- <StatsGrid /> -->
+      <ExpenseSummaryGrid />
       <!-- <VaultSection /> -->
       <TransactionButtons />
     </div>
