@@ -1,0 +1,15 @@
+{
+  "name": "Cashflow",
+  "short_name": "cashflow",
+  "start_url": "/",
+  "display": "standalone",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any"
+    }
+  ],
+  "theme_color": "#000",
+  "background_color": "#ffffff"
+}

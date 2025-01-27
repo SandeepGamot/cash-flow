@@ -3,7 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" href="/favicon.svg" />
+      <link rel="manifest" href="cashflow.manifest.json">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      if('serviceWorker' in navigator){
+        navigator.serviceWorker.register('/service-worker.js').then(console.log).catch(console.error)
+      }
+    </script>
     <title>Cashflow</title>
   </head>
   <body>
