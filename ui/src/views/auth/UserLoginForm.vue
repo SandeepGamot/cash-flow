@@ -34,8 +34,12 @@ const onLogin = async () => {
     $toast.add({ severity: 'success', summary: 'Login successful.' })
     router.push({ name: AppRoutes.base })
   } catch (error: any) {
-    $toast.add({ severity: 'error', summary: 'Login failed. Invalid username or password' })
-    console.error({ error })
+    if (error.status === 401) {
+      $toast.add({ severity: 'error', summary: 'Login failed. Invalid username or password' })
+    } else {
+      $toast.add({ severity: 'error', summary: 'Something went wrong' })
+      console.error({ error })
+    }
   } finally {
     submitting.value = false
   }
